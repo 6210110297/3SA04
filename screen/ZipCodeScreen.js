@@ -1,6 +1,7 @@
-import React,{useNavigation} from 'react';
+import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet,FlatList,View,Text } from 'react-native';
+import { StyleSheet, FlatList, View, Text,TouchableHighlight } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const availableZipItems = [
     { place: 'Hatyai', code: '90110' },
@@ -8,40 +9,43 @@ const availableZipItems = [
     { place: 'Chiangmai', code: '50000' },
     { place: 'Khonkaen', code: '40000' },
     { place: 'Chonburi', code: '20000' },
-   ]
-   const ZipItem = ({place, code, navigation}) => (
-    <View>
-    <Text>{place}</Text>
-    <Text>{code}</Text>
-    </View>
-    )
-   const _keyExtractor = item => item.code
-   export default function ZipCodeScreen(){
+]
+
+
+
+const ZipItem = ({ place, code, navigation}) => (
+    <TouchableHighlight onPress={()=> navigation.navigate('Weather',{zipCode:code})} style={styles.zipItem}>
+        <Text style={styles.zipPlace}>{place}</Text>
+        <Text style={styles.zipCode}>{code}</Text>
+    </TouchableHighlight>
+)
+const _keyExtractor = item => item.code
+export default function ZipCodeScreen() {
     const navigation = useNavigation()
     return (
-    <View>
-    <FlatList
-    data={availableZipItems}
-    keyExtractor={_keyExtractor}
-    renderItem={({item}) => <ZipItem {...item} navigation={navigation}/>}
-    />
-    <StatusBar style="auto" />
-    </View>
+        <View>
+            <FlatList
+                data={availableZipItems}
+                keyExtractor={_keyExtractor}
+                renderItem={({ item }) => <ZipItem {...item} navigation={navigation} />}
+            />
+            <StatusBar style="auto" />
+        </View>
     );
-    
-   }
 
-   const styles = StyleSheet.create({
-       zipItem:{
-           flex:1,
-           flexDirection:'row',
-           justifyContent: 'space-evenly',
+}
 
-       },
-       zipPlace:{
-           flex:1,
-       },
-       zipCode:{
-            flex:1,
-       }
-   })
+const styles = StyleSheet.create({
+    zipItem: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+
+    },
+    zipPlace: {
+        flex: 1,
+    },
+    zipCode: {
+        flex: 1,
+    }
+})

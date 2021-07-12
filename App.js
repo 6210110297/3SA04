@@ -1,11 +1,12 @@
 import React from 'react';
-import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { StyleSheet, Text, View } from 'react-native';
-import Weather from './components/Weather';
-import ZipCodeScreen from './screen/ZipCodeScreen';
+import { StyleSheet} from 'react-native';
 import Constants from 'expo-constants';
+
+import ZipCodeScreen from './screen/ZipCodeScreen';
+import WeatherScreen from './screen/WeatherScreen';
+
 
 const Stack = createStackNavigator()
 
@@ -14,6 +15,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Home" component={ZipCodeScreen} />
+        <Stack.Screen name="Weather" component={WeatherScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
