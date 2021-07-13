@@ -107,6 +107,7 @@ const styles = StyleSheet.create({
         color: '#fff',
     },
     title: {
+        alignItems:'center',
         marginBottom: 20,
         fontSize: 30,
         fontWeight: 'bold',
