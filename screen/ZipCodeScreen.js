@@ -1,6 +1,6 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, FlatList, View, Text } from 'react-native';
+import { StyleSheet, FlatList, View, Text, ImageBackground } from 'react-native';
 import { TouchableHighlight } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 
@@ -15,10 +15,10 @@ const availableZipItems = [
 
 
 const ZipItem = ({ place, code, navigation }) => (
-    <TouchableHighlight onPress={() => navigation.navigate('Weather', { zipCode: code })} >
+    <TouchableHighlight onPress={() => navigation.navigate('Weather', { zipCode: code })} style={styles.zipItem}>
         <View style={styles.zipItem}>
             <Text style={styles.zipPlace}>{place}</Text>
-            <Text style={styles.zipCode}>{code}</Text>
+            <Text style={styles.zipCode}>Zipcode: {code}</Text>
         </View>
 
     </TouchableHighlight>
@@ -27,31 +27,55 @@ const _keyExtractor = item => item.code
 export default function ZipCodeScreen() {
     const navigation = useNavigation()
     return (
-        <View>
-            <FlatList
-                data={availableZipItems}
-                keyExtractor={_keyExtractor}
-                renderItem={({ item }) => <ZipItem {...item} navigation={navigation} />}
-            />
-            <StatusBar style="auto" />
-        </View>
+        <ImageBackground source={require('../bg.png')} style={styles.bg}>
+            <View style={styles.zipList}>
+
+                <FlatList
+                    data={availableZipItems}
+                    keyExtractor={_keyExtractor}
+                    renderItem={({ item }) => <ZipItem {...item} navigation={navigation} />}
+                />
+                <StatusBar style="auto" />
+            </View>
+        </ImageBackground>
+
     );
 
 }
 
 const styles = StyleSheet.create({
+    bg: {
+        alignItems: 'center',
+        width: '100%',
+        height: '100%',
+    },
+    zipList: {
+        flex: 1,
+        width: '100%',
+        
+    },
     zipItem: {
         flex: 1,
         flexDirection: 'row',
-        justifyContent: 'space-evenly',
-
-    },
-   
-    zipPlace: {
-        flex: 1,
+        backgroundColor: '#DDFEF9',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        shadowOffset:{
+            width:0,
+            height:0
+        },
+        shadowRadius:0,
+        margin: 10,
         
+        opacity: 0.8,
+    },
+
+    zipPlace: {
+        flex: 2,
+        fontSize: 40,
     },
     zipCode: {
         flex: 1,
+        fontSize:18,
     }
 })

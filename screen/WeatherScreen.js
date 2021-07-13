@@ -4,9 +4,10 @@ import Weather from "../components/Weather";
 
 export default function WeatherScreen({ route }) {
     return (
-        <View>
+        <View >
             <Weather zipCode={route.params.zipCode} />
             <StatusBar style="auto" />
         </View>
     );
 }
+
