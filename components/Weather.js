@@ -20,7 +20,8 @@ export default function Weather(props) {
                         name: json.name,
                         main: json.weather[0].main,
                         description: json.weather[0].description,
-                        temp: json.main.temp
+                        temp: json.main.temp,
+                        icon: json.weather[0].icon
                     });
                 })
                 .catch((error) => {
@@ -40,7 +41,7 @@ export default function Weather(props) {
                     <Forecast {...forecastInfo} />
                 </View>
                 <View style={styles.container}>
-                    
+
                 </View>
 
             </ImageBackground>
