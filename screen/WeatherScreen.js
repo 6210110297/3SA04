@@ -1,13 +1,22 @@
 import React from "react";
-import { View,StatusBar } from "react-native";
+import { StyleSheet,View, StatusBar,ImageBackground } from "react-native";
 import Weather from "../components/Weather";
 
 export default function WeatherScreen({ route }) {
     return (
         <View >
-            <Weather zipCode={route.params.zipCode} />
-            <StatusBar style="auto" />
+            <ImageBackground source={require('../bg.png')} style={styles.bg}>
+                <Weather zipCode={route.params.zipCode} />
+                <StatusBar style="auto" />
+            </ImageBackground>
         </View>
     );
 }
 
+const styles = StyleSheet.create({
+    bg: {
+        justifyContent:'space-evenly',
+        width: '100%',
+        height: '100%',
+    },
+})

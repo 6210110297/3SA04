@@ -1,10 +1,10 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, ImageBackground, View } from "react-native";
 import Forecast from "./Forcast";
 
 export default function Weather(props) {
     const [forecastInfo, setForecastInfo] = useState({
-        name:'-',
+        name: '-',
         main: '-',
         description: '-',
         temp: 0
@@ -21,6 +21,9 @@ export default function Weather(props) {
                         main: json.weather[0].main,
                         description: json.weather[0].description,
                         temp: json.main.temp,
+                        pressure: json.main.pressure,
+                        humidity: json.main.humidity,
+                        clouds: json.clouds.all,
                         icon: json.weather[0].icon
                     });
                 })
@@ -32,19 +35,28 @@ export default function Weather(props) {
 
 
     return (
-        <View>
-            <ImageBackground source={require('../bg.png')} style={styles.backdrop}>
-                <View style={styles.container}>
-                    <Text style={styles.title}>{forecastInfo.name}</Text>
-                    <Text style={styles.text}>Zip Code is {props.zipCode}</Text>
+        <View style={styles.backdrop}>
+            <View style={styles.container}>
+                <Text style={styles.title}>{forecastInfo.name}</Text>
+                <Text style={styles.text}>Zip Code is {props.zipCode}</Text>
 
-                    <Forecast {...forecastInfo} />
+                <Forecast {...forecastInfo} />
+            </View>
+            <View style={styles.container}>
+                <View style={styles.row}>
+                    <Text style={styles.skyText}>Pressure</Text>
+                    <Text style={styles.skyText}>Humidity</Text>
+                    <Text style={styles.skyText}>Clouds</Text>
                 </View>
-                <View style={styles.container}>
-
+                <View style={styles.row}>
+                    <Text style={styles.skyText}>{forecastInfo.pressure}</Text>
+                    <Text style={styles.skyText}>{forecastInfo.humidity}</Text>
+                    <Text style={styles.skyText}>{forecastInfo.clouds}</Text>
                 </View>
+            </View>
 
-            </ImageBackground>
+
+
         </View>
     );
 
@@ -53,29 +65,46 @@ export default function Weather(props) {
 const styles = StyleSheet.create({
 
     backdrop: {
-        
+
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent:'space-evenly',
+        justifyContent: 'space-evenly',
         width: '100%',
         height: '100%',
 
     },
     container: {
         padding: 15,
-        margin:10,
-        
+        margin: 10,
+
         width: '90%',
         alignItems: 'center',
         backgroundColor: '#000',
-        borderRadius:20,
+        borderRadius: 20,
         opacity: 0.5,
+        justifyContent: 'space-evenly'
 
     },
-    title:{
-        marginBottom:20,
-        fontSize:30,
-        fontWeight:'bold',
+    row: {
+
+        width: '90%',
+        alignItems: 'center',
+
+
+        justifyContent: 'space-evenly',
+        flexDirection: 'row',
+        alignItems: 'center',
+
+    },
+    skyText: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: '#fff',
+    },
+    title: {
+        marginBottom: 20,
+        fontSize: 30,
+        fontWeight: 'bold',
         color: '#fff',
 
     },
