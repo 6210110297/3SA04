@@ -57,22 +57,18 @@ const styles = StyleSheet.create({
     zipItem: {
         flex: 1,
         flexDirection: 'row',
-        backgroundColor: '#DDFEF9',
+        backgroundColor: '#FFFDFA',
         justifyContent: 'space-between',
         alignItems: 'center',
-        shadowOffset:{
-            width:0,
-            height:0
-        },
-        shadowRadius:0,
         margin: 10,
-        
-        opacity: 0.8,
+        borderRadius:20,
+        opacity: 0.75,
     },
 
     zipPlace: {
         flex: 2,
         fontSize: 40,
+    
     },
     zipCode: {
         flex: 1,

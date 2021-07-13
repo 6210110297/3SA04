@@ -39,6 +39,9 @@ export default function Weather(props) {
 
                     <Forecast {...forecastInfo} />
                 </View>
+                <View style={styles.container}>
+                    
+                </View>
 
             </ImageBackground>
         </View>
@@ -49,18 +52,22 @@ export default function Weather(props) {
 const styles = StyleSheet.create({
 
     backdrop: {
-
+        
         flexDirection: 'column',
         alignItems: 'center',
+        justifyContent:'space-evenly',
         width: '100%',
         height: '100%',
 
     },
     container: {
         padding: 15,
-        width: '100%',
+        margin:10,
+        
+        width: '90%',
         alignItems: 'center',
         backgroundColor: '#000',
+        borderRadius:20,
         opacity: 0.5,
 
     },
